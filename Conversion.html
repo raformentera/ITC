@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Conversion Program - CS 1130</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body, h1, h2, h3, h4, h5, h6, p, li, a, button, th, td {
+            font-family: Cambria, serif !important;
+        }
+        .assignment-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+        }
+        .custom-navbar {
+            background-color: #1D2756 !important;
+        }
+        .custom-navbar a,
+        .custom-navbar button {
+            color: white !important;
+        }
+        .w3-dropdown-content a {
+            color: black !important;
+        }
+        .header-section {
+            padding-top: 60px !important;
+            padding-bottom: 20px !important;
+        }
+        .header-section h1 {
+            margin-bottom: 10px !important;
+        }
+        select, input {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #1D2756;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .result {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        /* Remove number input arrows */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar custom-navbar w3-card">
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-center">HOME</a>
+    
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">PROGRAMS <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="conversion.html" class="w3-bar-item w3-button">1. Conversion</a>
+        <a href="#tax-calculator" class="w3-bar-item w3-button">2. Income Tax Calculator</a>
+        <a href="#looping" class="w3-bar-item w3-button">3. Looping Programs</a>
+        <a href="#payroll" class="w3-bar-item w3-button">4. Payroll System</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Content-->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+<!-- Conversion Program -->
+  <div class="w3-container w3-content" style="max-width:800px">
+    
+    <div class="assignment-section">
+      <h1>Unit Conversion</h1>
+      
+      <div>
+        <label>Conversion Type:</label><br>
+        <select id="conversionType">
+          <option value="cToF">Celsius to Fahrenheit</option>
+          <option value="fToC">Fahrenheit to Celsius</option>
+          <option value="mToF">Meters to Feet</option>
+          <option value="fToM">Feet to Meters</option>
+        </select>
+      </div>
+      
+      <div>
+        <label>Value:</label><br>
+        <input type="number" id="inputValue">
+      </div>
+      
+      <button onclick="convert()">Convert</button>
+      
+      <div class="result" id="conversionResult">
+        Result will appear here
+      </div>
+    </div>
+    
+  </div>
+
+</div>
+
+<script>
+function convert() {
+    const conversionType = document.getElementById('conversionType').value;
+    const inputValue = parseFloat(document.getElementById('inputValue').value);
+    const resultElement = document.getElementById('conversionResult');
+    
+    if (isNaN(inputValue)) {
+        resultElement.innerHTML = "Please enter a valid number";
+        return;
+    }
+    
+    let result;
+    
+    switch(conversionType) {
+        case 'cToF':
+            result = (inputValue * 9/5) + 32;
+            resultElement.innerHTML = inputValue + "°C = " + result.toFixed(2) + "°F";
+            break;
+        case 'fToC':
+            result = (inputValue - 32) * 5/9;
+            resultElement.innerHTML = inputValue + "°F = " + result.toFixed(2) + "°C";
+            break;
+        case 'mToF':
+            result = inputValue * 3.28084;
+            resultElement.innerHTML = inputValue + " meters = " + result.toFixed(2) + " feet";
+            break;
+        case 'fToM':
+            result = inputValue / 3.28084;
+            resultElement.innerHTML = inputValue + " feet = " + result.toFixed(2) + " meters";
+            break;
+    }
+}
+
+// Enter key support
+document.getElementById('inputValue').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') convert();
+});
+</script>
+
+</body>
+</html>
