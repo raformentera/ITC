@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Income Tax Calculator </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body, h1, h2, h3, h4, h5, h6, p, li, a, button, th, td {
+            font-family: Cambria, serif !important;
+        }
+        .assignment-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+        }
+        .custom-navbar {
+            background-color: #1D2756 !important;
+        }
+        .custom-navbar a,
+        .custom-navbar button {
+            color: white !important;
+        }
+        .w3-dropdown-content a {
+            color: black !important;
+        }
+        .header-section {
+            padding-top: 60px !important;
+            padding-bottom: 20px !important;
+        }
+        .header-section h1 {
+            margin-bottom: 10px !important;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #1D2756;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .result {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar custom-navbar w3-card">
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-center">HOME</a>
+    
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">PROGRAMS <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="Conversion.html" class="w3-bar-item w3-button">1. Conversion</a>
+        <a href="TaxCalculator.html" class="w3-bar-item w3-button">2. Income Tax Calculator</a>
+        <a href="#looping" class="w3-bar-item w3-button">3. Looping Programs</a>
+        <a href="#payroll" class="w3-bar-item w3-button">4. Payroll System</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Content-->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+<!-- Income Tax Calculator -->
+  <div class="w3-container w3-content" style="max-width:800px">
+    
+    <div class="assignment-section">
+      <h1>Income Tax Calculator</h1>
+      
+      <div>
+        <label>Taxable Income (PHP):</label><br>
+        <input type="number" id="taxableIncome">
+      </div>
+      
+      <button id="calculateBtn">Calculate Tax</button>
+      
+      <div class="result" id="taxResult">
+        Tax amount will appear here
+      </div>
+    </div>
+    
+  </div>
+
+</div>
+
+<script>
+const calculateTax = () => {
+    const taxableIncome = parseFloat(document.getElementById('taxableIncome').value);
+    const resultElement = document.getElementById('taxResult');
+    
+    if (isNaN(taxableIncome)) {
+        resultElement.innerHTML = "Please enter a valid number";
+        return;
+    }
+    
+    const taxBrackets = [
+        { max: 250000, rate: 0.00, base: 0 },
+        { max: 400000, rate: 0.20, base: 0 },
+        { max: 800000, rate: 0.25, base: 30000 },
+        { max: 2000000, rate: 0.30, base: 130000 },
+        { max: 8000000, rate: 0.32, base: 490000 },
+        { max: Infinity, rate: 0.35, base: 2410000 }
+    ];
+    
+    const bracket = taxBrackets.find(bracket => taxableIncome <= bracket.max);
+    const prevBracket = taxBrackets[taxBrackets.indexOf(bracket) - 1];
+    const excess = taxableIncome - (prevBracket ? prevBracket.max : 0);
+    
+    const tax = bracket.base + (excess * bracket.rate);
+    
+    resultElement.innerHTML = `Income Tax: ₱${tax.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+}
+
+document.getElementById('calculateBtn').addEventListener('click', calculateTax);
+
+document.getElementById('taxableIncome').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') calculateTax();
+});
+
+</script>
+
+</body>
+</html>
