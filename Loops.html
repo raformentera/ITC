@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Conversion Program</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body, h1, h2, h3, h4, h5, h6, p, li, a, button, th, td {
+            font-family: Cambria, serif !important;
+        }
+        .assignment-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+        }
+        .custom-navbar {
+            background-color: #1D2756 !important;
+        }
+        .custom-navbar a,
+        .custom-navbar button {
+            color: white !important;
+        }
+        .w3-dropdown-content a {
+            color: black !important;
+        }
+        .header-section {
+            padding-top: 60px !important;
+            padding-bottom: 20px !important;
+        }
+        .header-section h1 {
+            margin-bottom: 10px !important;
+        }
+        select, input {
+            padding: 8px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #1D2756;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .result {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        /* Remove number input arrows */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar custom-navbar w3-card">
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-center">HOME</a>
+    
+    <div class="w3-dropdown-hover w3-hide-small">
+      <button class="w3-padding-large w3-button" title="More">PROGRAMS <i class="fa fa-caret-down"></i></button>     
+      <div class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="Conversion.html" class="w3-bar-item w3-button">1. Conversion</a>
+        <a href="TaxCalculator.html" class="w3-bar-item w3-button">2. Income Tax Calculator</a>
+        <a href="Loops.html" class="w3-bar-item w3-button">3. Looping Programs</a>
+        <a href="EmployeePayroll.html" class="w3-bar-item w3-button">4. Payroll System</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Content-->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+<!-- Looping Programs -->
+  <div class="w3-container w3-content" style="max-width:800px">
+    
+    <div class="assignment-section">
+      <h1>Looping Programs</h1>
+      
+      <!-- Factorial with While Loop -->
+      <div class="input-group">
+        <label>Enter n for factorial (While Loop):</label>
+        <input type="number" id="factorialInput" min="0">
+        <button id="calculateFactorialBtn">Calculate Factorial</button>
+        <div class="result" id="factorialResult">
+          Factorial result will appear here
+        </div>
+      </div>
+      
+      <!-- Sum with Do While Loop -->
+      <div class="input-group">
+        <label>Enter n for sum (Do While Loop):</label>
+        <input type="number" id="sumInput" min="1">
+        <button id="calculateSumBtn">Calculate Sum</button>
+        <div class="result" id="sumResult">
+          Sum result will appear here
+        </div>
+      </div>
+      
+      <!-- Average with For Loop -->
+      <div class="input-group">
+        <label>Enter n for average (For Loop):</label>
+        <input type="number" id="averageInput" min="1">
+        <button id="calculateAverageBtn">Calculate Average</button>
+        <div class="result" id="averageResult">
+          Average result will appear here
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+</div>
+
+<script>
+// Factorial using While Loop
+const calculateFactorial = () => {
+    const n = parseInt(document.getElementById('factorialInput').value);
+    const resultElement = document.getElementById('factorialResult');
+    
+    if (isNaN(n) || n < 0) {
+        resultElement.innerHTML = "Please enter a non-negative integer";
+        return;
+    }
+    
+    let factorial = 1;
+    let i = 1;
+    
+    // While loop
+    while (i <= n) {
+        factorial *= i;
+        i++;
+    }
+    
+    resultElement.innerHTML = `${n}! = ${factorial.toLocaleString()}`;
+}
+
+// Sum using Do While Loop
+const calculateSum = () => {
+    const n = parseInt(document.getElementById('sumInput').value);
+    const resultElement = document.getElementById('sumResult');
+    
+    if (isNaN(n) || n < 1) {
+        resultElement.innerHTML = "Please enter a positive integer";
+        return;
+    }
+    
+    let sum = 0;
+    let i = 1;
+    
+    // Do While loop
+    do {
+        sum += i;
+        i++;
+    } while (i <= n);
+    
+    resultElement.innerHTML = `Sum of first ${n} numbers = ${sum.toLocaleString()}`;
+}
+
+// Average using For Loop
+const calculateAverage = () => {
+    const n = parseInt(document.getElementById('averageInput').value);
+    const resultElement = document.getElementById('averageResult');
+    
+    if (isNaN(n) || n < 1) {
+        resultElement.innerHTML = "Please enter a positive integer";
+        return;
+    }
+    
+    let sum = 0;
+    
+    // For loop
+    for (let i = 1; i <= n; i++) {
+        sum += i;
+    }
+    
+    const average = sum / n;
+    
+    resultElement.innerHTML = `Average of first ${n} numbers = ${average.toFixed(2)}`;
+}
+
+// Event Listeners
+document.getElementById('calculateFactorialBtn').addEventListener('click', calculateFactorial);
+document.getElementById('calculateSumBtn').addEventListener('click', calculateSum);
+document.getElementById('calculateAverageBtn').addEventListener('click', calculateAverage);
+
+// Enter key support
+const addEnterKeySupport = (inputId, functionName) => {
+    document.getElementById(inputId).addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') functionName();
+    });
+}
+
+addEnterKeySupport('factorialInput', calculateFactorial);
+addEnterKeySupport('sumInput', calculateSum);
+addEnterKeySupport('averageInput', calculateAverage);
+</script>
+
+</body>
+</html>
